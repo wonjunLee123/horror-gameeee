@@ -1,16 +1,34 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class InteractionTrigger : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private bool isPlayerInRange = false;
+    private PlayerController2D playerController;
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            playerController = other.GetComponent<PlayerController2D>();
+            isPlayerInRange = true;
+        }
     }
 
-    // Update is called once per frame
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerController = null;
+            isPlayerInRange = false;
+        }
+    }
+
     void Update()
     {
-        
+        if (isPlayerInRange && playerController != null && playerController.IsInteracting())
+        {
+            Debug.Log("상호작용");
+            // 여기서 문 열기, 아이템 줍기 등 구현 가능
+        }
     }
 }
