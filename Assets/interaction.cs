@@ -25,10 +25,11 @@ public class InteractionTrigger : MonoBehaviour
 
     void Update()
     {
-        if (isPlayerInRange && playerController != null && playerController.IsInteracting())
+        // S 키를 누른 "순간"에만 실행
+        if (isPlayerInRange && playerController != null && Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("상호작용");
-            // 여기서 문 열기, 아이템 줍기 등 구현 가능
+            // 여기에 실제 상호작용 코드 추가
         }
     }
 }
